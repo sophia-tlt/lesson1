@@ -113,4 +113,4 @@ discountSystem();
 console.log('Твой магазин: '+ name);
 console.log('Твой бюджет на 1 день: '+ money);
 console.log('Мы продаем: ' + mainList.shopGoods[0] + ', '+ mainList.shopGoods[1] + ' и '+ mainList.shopGoods[2] + ',а так же ' + mainList.shopGoods[3] + ', ' + mainList.shopGoods[4]);
-console.log('Наши сотрудники: '+ '1 - ' + mainList.employers[0] + ', 2 - ' + mainList.employers[1] + ', 3 - ' + mainList.employers[2] + ', 4 - ' + mainList.employers[3]);
+console.log('Наши сотрудники: '+ '1 - ' + mainList.employers[1] + ', 2 - ' + mainList.employers[2] + ', 3 - ' + mainList.employers[3] + ', 4 - ' + mainList.employers[4]);
