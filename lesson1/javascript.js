@@ -6,7 +6,8 @@ let money,
 function start () {
 
 	function moneyDay () {
-	money = prompt ('Ваш бюджет на месяц?');
+	let moneyMonth = prompt ('Ваш бюджет на месяц?');
+	money = moneyMonth/30;
 }
 moneyDay();
 
@@ -33,7 +34,7 @@ let mainList = {
 };
 
 function whoIsEmployers () {
-	for (let i=0; i<4; i++) {
+	for (let i=1; i<4; i++) {
 		let em = prompt('Как зовут Вашего сотрудника?');
 		mainList.employers[i] = em;
 	}
@@ -99,7 +100,7 @@ workTime(18);
 
 function discountSystem () {
 	price = prompt ('Сколько стоит ' + mainList.shopGoods[0] + '?');
-	if (discount = true) {
+	if (mainList.discount) {
 		console.log('Твоя цена со скидкой: ' + price * 0.8);
 	}
 	else {
@@ -110,6 +111,6 @@ discountSystem();
 
 
 console.log('Твой магазин: '+ name);
-console.log('Твой бюджет на 1 день: '+ money/30);
+console.log('Твой бюджет на 1 день: '+ money);
 console.log('Мы продаем: ' + mainList.shopGoods[0] + ', '+ mainList.shopGoods[1] + ' и '+ mainList.shopGoods[2] + ',а так же ' + mainList.shopGoods[3] + ', ' + mainList.shopGoods[4]);
 console.log('Наши сотрудники: '+ '1 - ' + mainList.employers[0] + ', 2 - ' + mainList.employers[1] + ', 3 - ' + mainList.employers[2] + ', 4 - ' + mainList.employers[3]);
