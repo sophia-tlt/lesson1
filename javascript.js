@@ -95,12 +95,13 @@ let mainList = {
 		mainList.shopItems.push(prompt('Напишите еще',''));
 		mainList.shopItems.sort();
 
-		mainList.shopItems.forEach (function (item) {
-			console.log("У нас вы можете купить: " + mainList.shopItems);
+		mainList.shopItems.forEach (function (item, i) {
+
+				console.log("У нас вы можете купить: " + (i+1) + ': ' + item);
 		})
 
-		for (let key in mainList.shopItems) {
-			console.log("Наш магазин включает в себя: " + mainList.shopItems);
+			for (let key in mainList) {
+			console.log("Наш магазин включает в себя: " + key);
 		}
 
 	}
