@@ -33,15 +33,35 @@ let mainList = {
 
 console.log(getInputFunction);
 
+for (i=0; i<getInputFunction.length;i++) {
+			getInputFunction[i].setAttribute('disabled','disabled');
+	};
+
+
+/*if (getInputFunction.value == '') {
+	for (i=0; i<getInputFunction.length;i++) {
+			getInputFunction[i].disabled = true;
+	};
+} else {
+		for (i=0; i<getInputFunction.length;i++) {
+			getInputFunction[i].disabled = false;
+	}
+}*/
+
 getInput.addEventListener('click', () => {
 	money = prompt ('Ваш бюджет на месяц?','');
 
 	while (isNaN(money) || money == '' || money == null) {
 		money = prompt ('Ваш бюджет на месяц?');
 	}
+
 	getBudgetValue.textContent = money;
 
 	getNameValue.textContent = prompt ('Название вашего магазина?','').toUpperCase();
+
+	for (i=0; i<getCategories.length;i++) {
+			getCategories[i].disabled= false;
+	}
 });
 
 
@@ -49,15 +69,17 @@ getButtonGoods.addEventListener('click', () => {
 	for (let i=0; i<getCategories.length; i++) {
 		let a = getCategories[i].value;
 
-		if ((typeof(a)) === 'string' && a !== null && a.length < 50 ) {
+		if ((typeof(a)) === 'string' && a !== null && a.length < 50 && a !=='') {
 			console.log('Все верно!');
 			mainList.shopGoods[i] = a;
 			getGoodsValue.textContent = mainList.shopGoods;
-		} else {
+			getChoose.disabled = false;
+		}else {
 			alert('Это обязательное поле! Пожалуйста,заполни его!');
-			i--;
+			getChoose.disabled = true;
 				}
-	}
+			}
+
 });
 
 getChoose.addEventListener('change', () => {
@@ -68,7 +90,10 @@ getChoose.addEventListener('change', () => {
 		mainList.shopItems.sort();
 
 		getItemsValue.textContent = mainList.shopItems;
+
+		getTime.disabled = false;
 }
+
 });
 
 
@@ -77,15 +102,19 @@ getTime.addEventListener('change', () => {
 	if (time<0) {
 		console.log('Такого просто не может быть!');
 		mainList.open = false;
+		getMoney.disabled = true;
 	} else if (time > 8 && time < 20 ) {
 		console.log('Время работать!');
 		mainList.open = true;
+		getMoney.disabled = false;
 	} else if (time<24) {
 		console.log('Уже слишком поздно');
 		mainList.open = false;
+		getMoney.disabled = true;
 	} else {
 		console.log('В сутках только 24 часа!');
 		mainList.open = false;
+		getMoney.disabled = true;
 		}
 
 	if (mainList.open == true) {
@@ -95,13 +124,16 @@ getTime.addEventListener('change', () => {
 		getIsopenValue.style.backgroundColor = 'red';
 
 		for (i=0; i<getInputFunction.length;i++) {
-			getInputFunction[i].setAttribute('disabled','disabled');
+			getInputFunction[i].disabled = true;
 	}
 	}
 });
 
 getButtonBudget.addEventListener('click', () => {
 	getMoney.value = money/30;
+	for (i=0; i<getEmployers.length;i++) {
+	getEmployers[i].disabled = false;
+}
 	});
 
 
@@ -114,8 +146,8 @@ getButtonEmployers.addEventListener('click', () => {
 });
 
 getInput.addEventListener('click', () => {
-	price = prompt ('Есть ли у Вас скидка? (Да/Нет)');
-		if (price == ('Да' || 'да')) {
+	price = prompt ('Есть ли у Вас скидка? (Да/Нет)').toUpperCase();
+		if (price == ('ДА')) {
 			getDiscountValue.style.backgroundColor = 'green';
 		} else {
 			getDiscountValue.style.backgroundColor = 'red';
