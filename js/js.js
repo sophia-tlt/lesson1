@@ -1,9 +1,11 @@
 window.addEventListener('DOMContentLoaded',function() {
+
+	Watch();
 	function Watch() {
 
 	let	timer = document.getElementById('timer'),
 		date = new Date(),
-		hour = date.setHours(),
+		hour = date.getHours(),
 		min = date.getMinutes(),
 		sec = date.getSeconds();
 
@@ -18,7 +20,7 @@ window.addEventListener('DOMContentLoaded',function() {
 		sec = Time(sec);
 
 			timer.innerHTML = hour + ' : ' + min +' : ' + sec;
-			setTimeout(Watch(), 1);
+			setTimeout(Watch, 1);
 			isetInterval(Watch(), 1000);
 		}
 });
