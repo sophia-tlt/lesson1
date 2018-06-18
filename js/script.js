@@ -91,6 +91,45 @@ function setClock (id, endTime) { //функция которая будет з�
 setClock('timer', deadline);
 
 
+//modal
+
+let more = document.querySelector('.more'), //получаем кнопку "узнать больше"
+	overlay = document.querySelector('.overlay'), //получаем все наше модальное окно с подложкой снизу
+	close = document.querySelector('.popup-close'), //получаем кнопку крестик "закрыть"
+	description = document.querySelectorAll('.description-btn');
+
+more.addEventListener('click', function() { //функция которая покажет модальное окно
+	this.classList.add('more-splash');
+	overlay.style.display = 'block';
+	document.body.style.overflow = 'hidden'; //запрет прокрутки страницы пока открыто окно
+});
+
+close.addEventListener('click', function() { //функция скрытия окна крестиком
+	overlay.style.display = 'none';
+	more.classList.remove('more-splash');
+	document.body.style.overflow = '';
+});
+
+for (let i=0; i<description.length; i++) {
+	description[i].addEventListener('click', function() {
+	this.classList.add('more-splash');
+	overlay.style.display = 'block';
+	document.body.style.overflow = 'hidden';
+});
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 }); 
 
  

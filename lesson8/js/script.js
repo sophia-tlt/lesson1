@@ -91,7 +91,6 @@ function setClock (id, endTime) { //функция которая будет з�
 
 setClock('timer', deadline);
 
-
 }); 
 
  
