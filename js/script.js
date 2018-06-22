@@ -11,7 +11,7 @@ window.addEventListener('DOMContentLoaded',function(){
 			}
 		}
 
-		hideTabContent(1);
+		hideTabContent(1)
 
 
  //функция показывания табов
@@ -35,8 +35,8 @@ window.addEventListener('DOMContentLoaded',function(){
 					}
 				}
 			}
-		});
-
+		})
+});
 //Timer
 let deadline = '2018-06-13'//дата на которой заканчивается таймер
 
@@ -52,14 +52,14 @@ function getTimeRemaining(endTime) {  //функция которая будет
 			'minutes':minutes, //удобней через объект потому что легко получим через .любой объект
 			'seconds':seconds
 		};
-		};
+		}
 
 function setClock (id, endTime) { //функция которая будет запускать наши часы,в параметрах передается ID таймера и наш deadline
 	let timer = document.getElementById(id),
 		hours = timer.querySelector('.hours'), //мы можем называть переменные так же потому что они внутри функции а за ее пределами их не существует
 		minutes = timer.querySelector('.minutes'),
 		seconds = timer.querySelector('.seconds');
-		let timeInterval = setInterval(updateClock,1000);  //повторение обновления таймера
+		let timeInterval = setInterval(updateClock,1000)  //повторение обновления таймера
 
 	function updateClock() {   //функция которая будет обновлять наш таймер каждую секунду
 		let t = getTimeRemaining(endTime);  //результат функции расчета времени до дедлайна.Сюда запишется объект.Параметр endTime из функции setClock
@@ -82,13 +82,13 @@ function setClock (id, endTime) { //функция которая будет з�
 			minutes.innerHTML = '00';
 			seconds.innerHTML = '00';
 		}
-	};
+	}
 
 	updateClock(); //запускаем функцию
 
-};
+}
 
-setClock('timer', deadline);
+setClock('timer', deadline)
 
 
 //modal
@@ -102,23 +102,21 @@ more.addEventListener('click', function() { //функция которая по
 	this.classList.add('more-splash');
 	overlay.style.display = 'block';
 	document.body.style.overflow = 'hidden'; //запрет прокрутки страницы пока открыто окно
-});
+})
 
 close.addEventListener('click', function() { //функция скрытия окна крестиком
 	overlay.style.display = 'none';
 	more.classList.remove('more-splash');
 	document.body.style.overflow = '';
-});
+})
 
 for (let i=0; i<description.length; i++) {
 	description[i].addEventListener('click', function() {
 		this.classList.add('more-splash');
 		overlay.style.display = 'block';
 		document.body.style.overflow = 'hidden';
-});
-}
-
-}); 
+})
+} 
 
  
 function animate (draw,duration) {  //в значениях 1-что нужно сделать, 2-за какое время
@@ -148,29 +146,50 @@ navigation.addEventListener('click', function(event){
 		let section = document.getElementById(target.getAttribute('href').slice(1) );
 		window.scrollBy( 0, section.getBoundingClientRect().top/20-3);
 	},1500)
+})
+
+//Form
+let message = new Object();
+	message.loading = "Загрузка...";
+	message.success = "Спасибо! Скоро мы с Вами свяжемся!";
+	message.failure = "Что то пошло не так...";
+
+let form = document.getElementsByClassName('main-form')[0],
+	input = form.getElementsByTagName('input'),
+	statusMessage = document.createElement('div');
+	statusMessage.classList.add('status');
+
+
+form.addEventListener('submit', function (event) {
+	event.preventDefault();
+	form.appendChild(statusMessage);
+
+	//Ajax
+	let request = new XMLHttpRequest();
+	request.open("POST",'server.php')
+
+	request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+	let formData = new FormData(form);
+
+	request.send(formData);
+
+	request.onreadystatechange = function() {
+		if (request.readyState < 4 ) {
+			statusMessage.innerHTML = message.loading;
+		} else if(request.readyState === 4 ) {
+			if (request.status == 200 && request.status < 300) {
+				statusMessage.innerHTML = message.success;
+				// добавляем контент на страницу
+			}
+			else {
+				statusMessage.innerHTML = message.failure;
+			}
+		}
+	}
+
+	for (let i = 0; i< input.length; i++) {
+		input[i].value = '';
+		//очищаем поля ввода
+	}
 });
-
-class Options {
-	constructor (height, width, bg, fontSize, textAlign) {
-		this.height = height;
-		this.width = width;
-		this.bg = bg;
-		this.fontSize = fontSize;
-		this.textAlign = textAlign;
-	}
-
-	createNewDiv(text) {
-		let div = document.createElement('div');
-		div.textContent = text;
-		div.style.cssText = `height:${this.height};
-							width:${this.width};
-							background:${this.bg};
-							font-size:${this.fontSize};
-							text-align:${this.textAlign};`
-
-		document.body.appendChild(div);
-	}
-}
-
-let obj = new Options ('150px','300px','green','24px','center');
-obj.createNewDiv('Привет! Это мое домашнее задание!')
