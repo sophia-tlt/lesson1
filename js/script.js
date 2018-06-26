@@ -17,10 +17,8 @@ $(document).ready(function(){
   		}, 1500)
   });
 
-  let parent = $('.main_mobmenu_field_list:first-child'),
-  	li = $(parent.find('li:eq(2)'));
 
-  $(li).on('click', function() {
+  $('a:eq(8)').on('click', function() {
   	$('.overlay').fadeToggle('slow');
   	$('.modal').animate(
   		{
