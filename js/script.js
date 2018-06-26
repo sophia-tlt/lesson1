@@ -31,6 +31,7 @@ $(document).ready(function(){
   	$('.modal').animate(
   		{
   			opacity: 'toggle',
+  			top:'0'
   		}, 500);
 
   	$('.overlay').fadeToggle('slow');
