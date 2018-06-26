@@ -38,7 +38,7 @@ window.addEventListener('DOMContentLoaded',function(){
 		})
 });
 //Timer
-let deadline = '2018-06-13'//дата на которой заканчивается таймер
+let deadline = '2018-07-10'//дата на которой заканчивается таймер
 
 function getTimeRemaining(endTime) {  //функция которая будет расчитывать сколько осталось до дедлайна
 	let t = Date.parse(endTime) - Date.parse(new Date()), //разница между дедлайном и текущей датой. метод parse передает значение в миллисекундах
@@ -234,3 +234,102 @@ contactForm.addEventListener('submit', function (event) {
 		contactInput[i].value = '';
 	}
 });
+
+//slider 
+let slideIndex = 1, //индекс который будет показывать первый слайд
+	slides = document.getElementsByClassName('slider-item'), //получаем наши картинки-слайды
+	prev = document.querySelector('.prev'), //получаем кнопку "назад"
+	next = document.querySelector('.next'), //получаем кнопку "вперед"
+	dotsWrap = document.querySelector('.slider-dots'), //получаем блок с точками
+	dots = document.getElementsByClassName('dot'); //получаем точки под слайдером
+
+
+showSlides(slideIndex);
+
+function showSlides (n) {  //функция показа текущего слайда
+
+	if (n > slides.length) {
+		slideIndex = 1;
+	};
+	if (n < 1) {
+		slideIndex = slides.length;
+	};
+
+	for (let i=0; i < slides.length; i++) {  //скрываем ненужные слайды
+		slides[i].style.display = 'none';
+	};
+
+	for (let i = 0; i < dots.length; i++) { // снимаем классы с точек
+		dots[i].classList.remove('dot-active');
+	};
+
+		slides[slideIndex - 1].style.display = 'block';
+		dots[slideIndex - 1].classList.add ('dot-active');
+
+}
+
+
+function plusSlides (n) { //функция которая будет отнимать или прибавлять количество слайдов
+	showSlides(slideIndex += n) //в этой записи если нажимается вперед, слайд делает шаг +1, если назад то -1
+}
+
+function currentSlide (n) {
+	showSlides(slideIndex = n) //получим наш текущий индекс
+}
+
+prev.addEventListener('click', function(){ //функция для кнопки назад
+	plusSlides(-1); //передаем -1 чтобы сделать шаг назад
+});
+
+next.addEventListener('click', function(){ //функция для кнопки назад
+	plusSlides(1); //передаем -1 чтобы сделать шаг назад
+});
+
+dotsWrap.addEventListener('click', function(event) { //метод делегирования
+	for (let i=0; i < dots.length+1; i++) { //прибавляем +1
+		if (event.target.classList.contains('dot') && event.target == dots[i-1]) { //проверяем есть ли класс у того что кликнули и сравниваем индекс нашей точки
+			currentSlide(i); //тогда вызываем функцию переключения
+		}
+	}
+});
+
+//calc
+let persons = document.getElementsByClassName('counter-block-input')[0],
+	restDays = document.getElementsByClassName('counter-block-input')[1],
+	place = document.getElementById('select'),
+	totalValue = document.getElementById('total'),
+	personsSum = 0,
+	daysSum = 0,
+	total = 0;
+
+	totalValue.innerHTML = 0;
+
+	persons.addEventListener('change', function() { //отслеживаем изменение в полях ввода
+		personsSum = +this.value; //отслеживаем значение input, this ссылается на persons
+		total = (daysSum + personsSum)*4000; // 
+		if (restDays.value == ''|| restDays.value == '+' || restDays.value == 'e' || restDays.value % 1 !== 0 || personsSum == '' || daysSum == '') {
+			totalValue.innerHTML = 0;
+	} else {
+		totalValue.innerHTML = total;
+	}
+	});
+
+	restDays.addEventListener('change', function() { //то же самое для второго поля
+		daysSum = +this.value;
+		total = (daysSum + personsSum)*4000;
+		if (persons.value == '' || persons.value == '+' || persons.value == 'e' || persons.value % 1 !== 0 || personsSum == '' || daysSum == '') {
+		totalValue.innerHTML = 0;	
+	} else {
+		totalValue.innerHTML = total;
+	}
+
+	});
+
+	place.addEventListener('change', function() {  //функция отслеживания за select
+		if (restDays.value == '' || persons.value == '' || persons.value % 1 !== 0 || restDays.value % 1 !== 0 || personsSum == '' || daysSum == '') { //проверяем чтобы не считался коэфициент, пока не заполнены обязательные поля 
+			totalValue.innerHTML = 0;
+		} else { //общую стоимость умножаем на select с индексом конкретной опции 
+			let a = total; //такая запись позволит только 1 раз изменять коэфициент а не постоянно умножать
+			totalValue.innerHTML = a * this.options[this.selectedIndex].value;
+		}
+	});
