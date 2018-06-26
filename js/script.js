@@ -307,7 +307,7 @@ let persons = document.getElementsByClassName('counter-block-input')[0],
 	persons.addEventListener('change', function() { //отслеживаем изменение в полях ввода
 		personsSum = +this.value; //отслеживаем значение input, this ссылается на persons
 		total = (daysSum + personsSum)*4000; // 
-		if (restDays.value == ''|| restDays.value == '+' || restDays.value == 'e' || restDays.value % 1 !== 0 || personsSum == '' || daysSum == '') {
+		if (restDays.value == ''|| restDays.value == '+' || restDays.value % 1 !== 0 || personsSum == '' || daysSum == '') {
 			totalValue.innerHTML = 0;
 	} else {
 		totalValue.innerHTML = total;
@@ -317,7 +317,7 @@ let persons = document.getElementsByClassName('counter-block-input')[0],
 	restDays.addEventListener('change', function() { //то же самое для второго поля
 		daysSum = +this.value;
 		total = (daysSum + personsSum)*4000;
-		if (persons.value == '' || persons.value == '+' || persons.value == 'e' || persons.value % 1 !== 0 || personsSum == '' || daysSum == '') {
+		if (persons.value == '' || persons.value == '+' || persons.value % 1 !== 0 || personsSum == '' || daysSum == '') {
 		totalValue.innerHTML = 0;	
 	} else {
 		totalValue.innerHTML = total;
@@ -333,3 +333,17 @@ let persons = document.getElementsByClassName('counter-block-input')[0],
 			totalValue.innerHTML = a * this.options[this.selectedIndex].value;
 		}
 	});
+
+	restDays.addEventListener('keypress', function() {
+        setTimeout(() => {
+            var res = /[^\d]/g.exec(this.value);
+            this.value = this.value.replace(res, '');
+        }, 0);
+    });
+
+    persons.addEventListener('keypress', function() {
+        setTimeout(() => {
+            var res = /[^\d]/g.exec(this.value);
+            this.value = this.value.replace(res, '');
+        }, 0);
+    });
