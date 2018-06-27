@@ -1,4 +1,4 @@
-window.addEventListener('DOMContentLoaded',function(){
+
 	let tab = document.getElementsByClassName('info-header-tab'),
 		tabContent = document.getElementsByClassName('info-tabcontent'),
 		info = document.getElementsByClassName('info-header')[0];
@@ -36,7 +36,6 @@ window.addEventListener('DOMContentLoaded',function(){
 				}
 			}
 		})
-});
 //Timer
 let deadline = '2018-07-10'//дата на которой заканчивается таймер
 
