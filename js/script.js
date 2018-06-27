@@ -1,4 +1,4 @@
-window.addEventListener('DOMContentLoaded',function(){
+
 	let tabs = require('./tabs.js');
 	let modal = require('./modal.js');
 	let form = require('./form.js');
@@ -14,4 +14,4 @@ contact();
 slider();
 calc();
 timer();
-});
+
