@@ -1,39 +1,17 @@
-$(document).ready(function(){
-  $('.main_btna').on('click', function() {
-  	$('.overlay').fadeToggle('slow');
-  	$('.modal').animate(
-  		{
-  			opacity: 'toggle',
-  			top: '100px'
-  		}, 1500)
-  });
+window.addEventListener('DOMContentLoaded',function(){
+	let tabs = require('tabs.js');
+	let modal = require('modal.js');
+	let form = require('form.js');
+	let contact = require('contact.js');
+	let slider = require('slider.js');
+	let calc = require('calc.js');
+	let timer = require('timer.js');
 
-  $('.main_btn').on('click', function() {
-  	$('.overlay').fadeToggle('slow');
-  	$('.modal').animate(
-  		{
-  			opacity: 'toggle',
-  			top: '100px'
-  		}, 1500)
-  });
-
-
-  $('a:eq(8)').on('click', function() {
-  	$('.overlay').fadeToggle('slow');
-  	$('.modal').animate(
-  		{
-  			opacity: 'toggle',
-  			top: '100px'
-  		}, 1500)
-  });
-
-    $('.close').on('click',function(){
-  	$('.modal').animate(
-  		{
-  			opacity: 'toggle',
-  			top:'0'
-  		}, 500);
-
-  	$('.overlay').fadeToggle('slow');
-  });
-  });
+tabs();
+modal();
+form();
+contact();
+slider();
+calc();
+timer();
+});
