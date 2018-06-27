@@ -25,7 +25,27 @@ var myFunc = function(a){
 console.log(each(array, myFunc));
 
 describe('Сумма', function(){
-	it('Возвращает ли наша функция значение true?', function() {
+	it('Возвращает ли наша функция булевое значение?', function() {
 		assert.typeOf(sum(2,2), 'boolean')
+	});
+});
+
+describe('Переменная num', function(){
+	it('Равна ли переменная num значению 5?', function() {
+		assert.equal(num, '5')
+	});
+});
+
+describe('Функция each', function(){
+	it('Является ли массив результатом функции each?', function() {
+		assert.typeOf(each(array, myFunc), 'array')
+	});
+
+	it('Какова длина(length) результата функции each?', function() {
+		assert.lengthOf(each(array, myFunc), 5, 'length of each: 5')
+	});
+
+	it('Результат функции each', function() {
+		assert.deepEqual(each(array, myFunc), [8, 7, 6, 5, 4])
 	});
 });
